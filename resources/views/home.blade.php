@@ -1,4 +1,6 @@
-<div>
-    <!-- Nothing worth having comes easy. - Theodore Roosevelt -->
+@extends('layouts.app')
+
+@section('content')
     <h1>Home Page</h1>
-</div>
+    <p>This is my body content.</p>
+@endsection
