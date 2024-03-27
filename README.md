@@ -1,13 +1,10 @@
 # Laravel Budget Tracker
 
-This is a project for a Budget Tracker using Laravel pages. 
-
-
+This is a project for a Budget Tracker using Laravel pages.
 
 ## Project Requirements:
 
 A page for managing Budget Categories, and one for Expenses
-
 
 **Budget Categories:**
 Index view displays a list of all budgets with Title and amount displayed.
@@ -17,18 +14,15 @@ Budget categories will include title, and budget field. Both fields are required
 Add and Edit pages must contain a link to get to the categories index view.
 Server-side validation required. Appropriate validation messages should be displayed.
 
-
 **Expenses:**
 index view displays list of budget categories with Title and budget amount displayed. Under each budget will be a list of the current month’s expenses.
 Ability to add, edit and delete expenses.
 Each budget category will also display a progress bar indicating the percentage of the total budget spent that month. If 50% of the budget has been spent, then the bar should span 50% of the total width.
 Depending on the total percentage spent, the bar will be a different color.
 
-
 * Green: <100% of budget spent
 * Yellow: 100% of budget spent
 * Red: >100% of budget spent
-
 
 Index page includes the ability to view other months budget/expenses using previous/next month buttons.
 
@@ -41,7 +35,6 @@ Add, Edit and Delete pages must include a “back” link to the index view with
 After an expense is deleted, the user should be redirected to the expense index page in the current month/year they came from. (just like in the previous bullet point)
 Server-side validation on all forms.
 
-
 **Other considerations:**
 
 All URLs and redirects should be generated using named routes.
@@ -53,22 +46,12 @@ To aid in testing, submit your project with no budget category or expenses in th
 You can use Seeders to generate test data but it is not a requirement.
 There should be a navigation menu to move between /budgets and /expenses pages
 
-
 ## Design Charter
-
-
-
 
 ### The Data Models
 
-
-
 ### Routes and Controllers
 
-
-
 ### Validation, Authorization and Helper Functions
-
-
 
 ### View and Data Presentation
