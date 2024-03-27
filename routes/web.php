@@ -16,7 +16,9 @@ use App\Http\Controllers\ExpenseCategoryController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']) -> name('home');
+// redirect to expenses
+Route::redirect('/', 'expenses');
+// Route::get('/', [HomeController::class, 'index']) -> name('home');
 
 // the expense routes
 Route::get('/expenses', [ExpenseEntryController::class, 'index']) -> name('expenses.index');

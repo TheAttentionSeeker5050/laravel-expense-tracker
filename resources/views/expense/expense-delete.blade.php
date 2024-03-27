@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>
+    <h1 id="app-title">
         Delete Expense
     </h1>
     <section id="create-category-expense-main-section">
-        <a href="#">
+        <a href="{{ route('expenses.index') }}" id="add-button">
             Back to Expenses
         </a>
 

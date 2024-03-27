@@ -1,21 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>
-        Expenses - March 2024
-    </h1>
 
-    <div id="expense-month-navigation-buttons-section">
-        <a href="#" >
-            Previous Month
-        </a>
-        <a href="#" >
-            Next Month
-        </a>
-    </div>
+    <section id="expense-month-navigation-buttons-section">
+        <h1>
+            Expenses - March 2024
+        </h1>
+
+        <p>
+            <a href="#" >
+                Previous Month
+            </a>
+
+            <a href="#" >
+                Next Month
+            </a>
+        </p>
+    </section>
 
     <section id="expense-listing-main-section">
-        <a href="#">
+        <a href="{{ route('expenses.create') }}" id="add-button">
             Add Expense
         </a>
 

@@ -1,7 +1,26 @@
+/* root variables */
+:root {
+    --background-primary: #111827;
+    --background-secondary: #1f2937;
+    --background-tertiary: #374151;
+    --background-white: #f5f5f5;
+    --background-white-hover: #cacaca;
+    --text-primary: #dddfe1;
+    --text-greyed: #94979c;
+    --text-blue: #37537e;
+    --text-blue-secondary: #3478dd;
+    --text-red: #f04145;
+    --text-electric-blue: #56decb;
+    --outline-purple: #4e47e2;
+    --outline-green: #1ac563;
+
+}
+
 * {
     padding: 0;
     margin: 0;
-    color: red;
+    box-sizing: border-box;
+    font-family: 'Roboto', 'Open Sans', 'Montserrat', 'Lato', sans-serif;
 }
 
 html, body {
@@ -9,5 +28,124 @@ html, body {
 }
 
 body {
-    background-color: #24384b;
+    background-color: var(--background-primary);
+
+    /* flex */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100vw;
+
+    header {
+        width: 100%;
+        background-color: var(--background-secondary);
+        width: 100%;
+        border-bottom: var(--background-tertiary) 2px solid;
+
+
+        nav {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 4rem;
+            padding: 0 2.8rem;
+
+
+            a {
+                color: var(--text-greyed);
+                text-decoration: none;
+                margin-left: 1rem;
+            }
+
+            ul {
+                display: flex;
+                gap: 2rem;
+                list-style: none;
+
+                li {
+                    padding: 1.6rem 0;
+
+
+                    a {
+                        margin: 0;
+                    }
+                }
+
+                .nav-option-highlighted {
+                    border-bottom: var(--outline-purple) 2px solid;
+                    a {
+                        color: var(--text-primary);
+                    }
+                }
+
+            }
+        }
+    }
+
+    main {
+        flex-grow: 1;
+        width: 100%;
+        color: var(--text-primary);
+
+        #app-title {
+            padding: 1.5rem 2.8rem;
+            background-color: var(--background-secondary);
+            font-size: 1.35rem;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        #expense-month-navigation-buttons-section{
+            background-color: var(--background-secondary);
+            display: flex;
+            justify-content: start;
+            flex-direction: column;
+            padding: 1.5rem 2.8rem;
+            gap: 0.7rem;
+
+            h1 {
+                font-size: 1.35rem;
+                font-weight: 500;
+            }
+
+
+            p {
+                display: flex;
+                gap: 1rem;
+
+                a {
+                    color: var(--text-blue-secondary);
+                    text-decoration: none;
+                    font-size: 0.95rem;
+                }
+            }
+        }
+
+        #categories-listing-main-section, #expense-listing-main-section, #create-category-expense-main-section {
+            padding: 4.2rem 2.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: start;
+
+            #add-button {
+                padding: 8px 12px;
+                background-color: var(--background-white);
+                color: var(--background-primary);
+                border-radius: 8px;
+                text-decoration: none;
+            }
+
+            #add-button:hover {
+                background-color: var(--background-white-hover);
+            }
+        }
+
+        #category-expense-list {
+
+        }
+
+    }
 }

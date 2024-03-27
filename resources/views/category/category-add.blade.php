@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>
+    <h1 id="app-title">
         Create Category
     </h1>
     <section id="create-category-expense-main-section">
-        <a href="#">All Categories</a>
+        <a href="{{ route('categories.index') }}" id="add-button">All Categories</a>
 
         <form action="#" method="post" id="create-expense-category-form">
             <div class="form-group">
