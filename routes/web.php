@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExpenseEntryController;
+use App\Http\Controllers\ExpenseCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']) -> name('home');
+
+// the expense routes
+Route::get('/expenses', [ExpenseEntryController::class, 'index']) -> name('expenses.index');
+Route::get('/expenses/create', [ExpenseEntryController::class, 'create']) -> name('expenses.create');
+Route::get('/expenses/{expenseEntry}/delete', [ExpenseEntryController::class, 'deleteForm']) -> name('expenses.delete');
+
+// the category routes
+Route::get('/categories', [ExpenseCategoryController::class, 'index']) -> name('categories.index');
+Route::get('/categories/create', [ExpenseCategoryController::class, 'create']) -> name('categories.create');
+

@@ -13,7 +13,8 @@ class ExpenseCategoryController extends Controller
      */
     public function index()
     {
-        //
+        // display the view category.category-list
+        return view('category.category-list');
     }
 
     /**
@@ -21,7 +22,8 @@ class ExpenseCategoryController extends Controller
      */
     public function create()
     {
-        //
+        // display the view category.category-add
+        return view('category.category-add');
     }
 
     /**

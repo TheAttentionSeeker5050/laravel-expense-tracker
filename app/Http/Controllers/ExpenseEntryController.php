@@ -13,7 +13,9 @@ class ExpenseEntryController extends Controller
      */
     public function index()
     {
-        //
+
+        // display the view expense.expense-entries
+        return view('expense.expense-list');
     }
 
     /**
@@ -21,7 +23,8 @@ class ExpenseEntryController extends Controller
      */
     public function create()
     {
-        //
+        // display the view expense.create-expense-add
+        return view('expense.expense-add');
     }
 
     /**
@@ -62,5 +65,15 @@ class ExpenseEntryController extends Controller
     public function destroy(ExpenseEntry $expenseEntry)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function deleteForm()
+    // public function destroyForm(ExpenseEntry $expenseEntry)
+    {
+        // display the view expense.expense-delete
+        return view('expense.expense-delete');
     }
 }
