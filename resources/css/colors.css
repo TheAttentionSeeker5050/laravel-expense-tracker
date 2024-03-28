@@ -1,0 +1,17 @@
+/* root variables */
+:root {
+    --background-primary: #111827;
+    --background-secondary: #1f2937;
+    --background-tertiary: #374151;
+    --background-white: #f5f5f5;
+    --background-white-hover: #cacaca;
+    --text-primary: #dddfe1;
+    --text-greyed: #94979c;
+    --text-blue: #37537e;
+    --text-blue-secondary: #3478dd;
+    --text-red: #f04145;
+    --text-electric-blue: #56decb;
+    --outline-purple: #4e47e2;
+    --outline-green: #1ac563;
+
+}

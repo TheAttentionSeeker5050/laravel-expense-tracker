@@ -1,0 +1,43 @@
+/* @import url('colors.css'); */
+
+
+body {
+
+    main {
+
+
+        #categories-list {
+            li {
+                justify-content: space-between;
+            }
+        }
+
+
+        #categories-listing-main-section, #expense-listing-main-section, #create-category-expense-main-section {
+
+
+
+            ul {
+
+                .categories-list-header {
+                    background-color: var(--background-tertiary);
+                    color: var(--text-greyed);
+                }
+
+
+            }
+        }
+
+        #categories-list {
+            li {
+
+                background-color: var(--background-secondary);
+                a {
+                    color: var(--text-electric-blue);
+                }
+            }
+        }
+
+
+    }
+}
