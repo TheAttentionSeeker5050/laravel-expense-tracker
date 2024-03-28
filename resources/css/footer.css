@@ -1,0 +1,14 @@
+footer {
+    text-align: center;
+    width: 100%;
+    color: var(--text-primary);
+    padding: 1.5rem 2.8rem;
+
+    a {
+        color: var(--text-blue);
+    }
+    a:hover {
+        color: var(--text-blue-secondary);
+    }
+
+}

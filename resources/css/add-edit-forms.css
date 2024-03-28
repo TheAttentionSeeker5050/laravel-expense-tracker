@@ -1,0 +1,55 @@
+#create-category-expense-main-section {
+    #create-expense-category-form {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        max-width: 700px;
+        width: 100%;
+        margin: 0 auto;
+
+        p {
+            margin: 0;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .form-group {
+
+            input {
+                background-color: var(--background-primary) !important;
+                color: white;
+                font-size: 1.1rem;
+            }
+
+
+
+            #budget, #amount {
+                background-color: var(--background-primary) !important;
+            }
+
+            .budget-input-container {
+                span {
+                    padding: 0 15px;
+                    background-color: var(--background-quaternary) !important;
+                }
+            }
+
+        }
+
+        button {
+            background-color: var(--background-white);
+            color: var(--text-dark);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.2s;
+            width: max-content;
+
+            &:hover {
+                background-color: var(--background-white-hover);
+            }
+        }
+    }
+}

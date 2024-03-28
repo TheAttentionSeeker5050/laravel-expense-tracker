@@ -1,7 +1,7 @@
 <header>
     <nav class="">
         <a class="" href="/">
-            <img src="app-logo.png" alt="Logo" class="logo" width="40">
+            <img src="/app-logo.png" alt="Logo" class="logo" width="40">
 
         </a>
         <ul>

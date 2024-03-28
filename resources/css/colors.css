@@ -3,9 +3,12 @@
     --background-primary: #111827;
     --background-secondary: #1f2937;
     --background-tertiary: #374151;
+    --background-quaternary: #6e6e6e;
     --background-white: #f5f5f5;
     --background-white-hover: #cacaca;
+    --background-greyed: #94979c;
     --text-primary: #dddfe1;
+    --text-dark: #111827;
     --text-greyed: #94979c;
     --text-blue: #37537e;
     --text-blue-secondary: #3478dd;

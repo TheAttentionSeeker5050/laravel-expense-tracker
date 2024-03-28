@@ -15,17 +15,17 @@
             <li>
                 <span >Category 1</span>
                 <span >400</span>
-                <a href="#">edit</a>
+                <a href="{{ route('categories.edit', ['expenseCategory' => 1]) }}">edit</a>
             </li>
             <li>
                 <span >Category 2</span>
                 <span >600</span>
-                <a href="#">edit</a>
+                <a href="{{ route('categories.edit', ['expenseCategory' => 2]) }}">edit</a>
             </li>
             <li>
                 <span >Category 3</span>
                 <span >300</span>
-                <a href="#">edit</a>
+                <a href="{{ route('categories.edit', ['expenseCategory' => 1]) }}">edit</a>
             </li>
         </ul>
 

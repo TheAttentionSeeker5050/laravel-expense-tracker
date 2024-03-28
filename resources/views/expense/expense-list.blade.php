@@ -30,26 +30,26 @@
             </li>
             <li class="budget-consumption-bar"></li>
             <li class="expense-list-item">
-                <span href="#">Expense 1 - $100.00</span>
+                <span>Expense 1 - $100.00</span>
                 |
-                <a href="#">Delete</a>
+                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
             </li>
             <li class="expense-list-item">
-                <span href="#">Expense 2 - $200.00</span>
+                <span>Expense 2 - $200.00</span>
                 |
-                <a href="#">Delete</a>
-            </li>
-
-            <li class="expense-list-item">
-                <span href="#">Expense 3 - $100.00</span>
-                |
-                <a href="#">Delete</a>
+                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
             </li>
 
             <li class="expense-list-item">
-                <span href="#">Expense 4 - $200.00</span>
+                <span>Expense 3 - $100.00</span>
                 |
-                <a href="#">Delete</a>
+                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
+            </li>
+
+            <li class="expense-list-item">
+                <span>Expense 4 - $200.00</span>
+                |
+                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
             </li>
         </ul>
 
@@ -59,26 +59,26 @@
                 <span>$400.00 of $600.00</span>
             </li>
             <li class="expense-list-item">
-                <span href="#">Expense 1 - $100.00</span>
+                <span>Expense 1 - $100.00</span>
                 |
-                <a href="#">Delete</a>
+                <a href=" {{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
             </li>
             <li class="expense-list-item">
-                <span href="#">Expense 2 - $200.00</span>
+                <span>Expense 2 - $200.00</span>
                 |
-                <a href="#">Delete</a>
-            </li>
-
-            <li class="expense-list-item">
-                <span href="#">Expense 3 - $100.00</span>
-                |
-                <a href="#">Delete</a>
+                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
             </li>
 
             <li class="expense-list-item">
-                <span href="#">Expense 4 - $200.00</span>
+                <span>Expense 3 - $100.00</span>
                 |
-                <a href="#">Delete</a>
+                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
+            </li>
+
+            <li class="expense-list-item">
+                <span>Expense 4 - $200.00</span>
+                |
+                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
             </li>
         </ul>
 
