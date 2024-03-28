@@ -23,59 +23,60 @@
             Add Expense
         </a>
 
-        <ul id="category-expense-list">
-            <li class="category-expense-list-header">
+        <ul class="expenses-list">
+            <li class="expense-list-header">
                 <span>Category 1</span>
-                <span>$400.00 of $600.00</span>
+                <span>$400.00 of $600.00/month</span>
             </li>
-            <li class="category-expense-list-item">
-                <a href="#">Expense 1 - $100.00</a>
+            <li class="budget-consumption-bar"></li>
+            <li class="expense-list-item">
+                <span href="#">Expense 1 - $100.00</span>
                 |
                 <a href="#">Delete</a>
             </li>
-            <li class="category-expense-list-item">
-                <a href="#">Expense 2 - $200.00</a>
-                |
-                <a href="#">Delete</a>
-            </li>
-
-            <li class="category-expense-list-item">
-                <a href="#">Expense 3 - $100.00</a>
+            <li class="expense-list-item">
+                <span href="#">Expense 2 - $200.00</span>
                 |
                 <a href="#">Delete</a>
             </li>
 
-            <li class="category-expense-list-item">
-                <a href="#">Expense 4 - $200.00</a>
+            <li class="expense-list-item">
+                <span href="#">Expense 3 - $100.00</span>
+                |
+                <a href="#">Delete</a>
+            </li>
+
+            <li class="expense-list-item">
+                <span href="#">Expense 4 - $200.00</span>
                 |
                 <a href="#">Delete</a>
             </li>
         </ul>
 
-        <ul id="category-expense-list">
-            <li class="category-expense-list-header">
+        <ul class="expenses-list">
+            <li class="expense-list-header">
                 <span>Category 1</span>
                 <span>$400.00 of $600.00</span>
             </li>
-            <li class="category-expense-list-item">
-                <a href="#">Expense 1 - $100.00</a>
+            <li class="expense-list-item">
+                <span href="#">Expense 1 - $100.00</span>
                 |
                 <a href="#">Delete</a>
             </li>
-            <li class="category-expense-list-item">
-                <a href="#">Expense 2 - $200.00</a>
-                |
-                <a href="#">Delete</a>
-            </li>
-
-            <li class="category-expense-list-item">
-                <a href="#">Expense 3 - $100.00</a>
+            <li class="expense-list-item">
+                <span href="#">Expense 2 - $200.00</span>
                 |
                 <a href="#">Delete</a>
             </li>
 
-            <li class="category-expense-list-item">
-                <a href="#">Expense 4 - $200.00</a>
+            <li class="expense-list-item">
+                <span href="#">Expense 3 - $100.00</span>
+                |
+                <a href="#">Delete</a>
+            </li>
+
+            <li class="expense-list-item">
+                <span href="#">Expense 4 - $200.00</span>
                 |
                 <a href="#">Delete</a>
             </li>
