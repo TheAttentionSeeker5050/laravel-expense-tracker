@@ -13,9 +13,12 @@ class ExpenseEntryController extends Controller
      */
     public function index()
     {
-
+        // a variable for the current nav opttion category
+        $currentNavStatus = 'expense';
         // display the view expense.expense-entries
-        return view('expense.expense-list');
+        return view('expense.expense-list', [
+            'currentNavStatus' => $currentNavStatus,
+        ]);
     }
 
     /**
@@ -23,8 +26,13 @@ class ExpenseEntryController extends Controller
      */
     public function create()
     {
+        // a variable for the current nav opttion category
+        $currentNavStatus = 'expense';
+
         // display the view expense.create-expense-add
-        return view('expense.expense-add');
+        return view('expense.expense-add', [
+            'currentNavStatus' => $currentNavStatus,
+        ]);
     }
 
     /**
@@ -73,7 +81,11 @@ class ExpenseEntryController extends Controller
     public function deleteForm()
     // public function destroyForm(ExpenseEntry $expenseEntry)
     {
+        // a variable for the current nav opttion category
+        $currentNavStatus = 'expense';
         // display the view expense.expense-delete
-        return view('expense.expense-delete');
+        return view('expense.expense-delete', [
+            'currentNavStatus' => $currentNavStatus,
+        ]);
     }
 }

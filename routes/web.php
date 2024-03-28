@@ -29,4 +29,5 @@ Route::get('/expenses/{expenseEntry}/delete', [ExpenseEntryController::class, 'd
 Route::get('/categories', [ExpenseCategoryController::class, 'index']) -> name('categories.index');
 Route::get('/categories/{expenseCategory}/edit', [ExpenseCategoryController::class, 'create']) -> name('categories.edit');
 Route::get('/categories/create', [ExpenseCategoryController::class, 'create']) -> name('categories.create');
+Route::post('/categories/create', [ExpenseCategoryController::class, 'store']) -> name('categories.store');
 

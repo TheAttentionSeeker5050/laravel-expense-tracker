@@ -13,8 +13,13 @@ class ExpenseCategoryController extends Controller
      */
     public function index()
     {
+        // a variable for the current nav opttion category
+        $currentNavStatus = 'category';
+
         // display the view category.category-list
-        return view('category.category-list');
+        return view('category.category-list', [
+            'currentNavStatus' => $currentNavStatus,
+        ]);
     }
 
     /**
@@ -22,8 +27,14 @@ class ExpenseCategoryController extends Controller
      */
     public function create()
     {
+        // a variable for the current nav opttion category
+        $currentNavStatus = 'category';
+
+
         // display the view category.category-add
-        return view('category.category-add');
+        return view('category.category-add', [
+            'currentNavStatus' => $currentNavStatus,
+        ]);
     }
 
     /**

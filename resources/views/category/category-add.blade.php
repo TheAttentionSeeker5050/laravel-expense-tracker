@@ -6,7 +6,11 @@
     </h1>
     <section id="create-category-expense-main-section">
 
-        <form action="#" method="post" id="create-expense-category-form">
+        {{-- post to category.store route and pass the request  --}}
+        <form action="{{ route('categories.store') }}"
+            method="post"
+            id="create-expense-category-form">
+
             <a href="{{ route('categories.index') }}" id="add-button">All Categories</a>
 
             <div class="form-group">
