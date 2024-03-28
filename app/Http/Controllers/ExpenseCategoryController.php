@@ -8,6 +8,12 @@ use App\Models\ExpenseCategory;
 
 class ExpenseCategoryController extends Controller
 {
+    // public function __construct()
+    // {
+    //     // exclude all the views from auth middleware, use wildcard
+    //     $this->middleware('auth')->except(['index', 'create', 'store']);
+    // }
+
     /**
      * Display a listing of the resource.
      */
@@ -16,9 +22,15 @@ class ExpenseCategoryController extends Controller
         // a variable for the current nav opttion category
         $currentNavStatus = 'category';
 
+
+        // get the categories
+        $categories = ExpenseCategory::all();
+
         // display the view category.category-list
         return view('category.category-list', [
             'currentNavStatus' => $currentNavStatus,
+            'categories' => $categories,
+
         ]);
     }
 
@@ -42,7 +54,28 @@ class ExpenseCategoryController extends Controller
      */
     public function store(StoreExpenseCategoryRequest $request)
     {
-        //
+
+
+        // // get title and budget from the request
+        // $title = $request->input('title');
+        // $budget = $request->input('budget');
+
+        // validate the request
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'budget' => 'required|integer',
+        ]);
+
+        try {
+        // create a new category
+        ExpenseCategory::createCategory($validated['title'], $validated['budget']);
+
+        // redirect to the category list
+        return redirect()->route('categories.index') -> with('success', 'Category created successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred. Please try again. Title: ' . $validated['title'] . '  | Budget: ' . $validated['budget'] . ' | Error: ' . $e->getMessage());
+        }
+
     }
 
     /**
