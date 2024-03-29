@@ -54,14 +54,12 @@ class ExpenseEntryController extends Controller
         $validated = $request->validate([
             'description' => 'required|string|max:255',
             'amount' => 'required|integer',
-            'category' => 'required|integer',
+            'category' => 'required|integer|min:1',
         ]);
 
         if (!$validated) {
-            // LOG ERROR INTO THE CONSOLE
-            error_log('An error occurred while creating the expense entry');
             // remain on the same page with an error message
-            return back()->with('error', 'An error occurred while creating the expense entry');
+            return redirect()->route('expenses.create')->with('error', 'An error occurred while creating the expense entry');
         }
 
         try {
@@ -73,7 +71,7 @@ class ExpenseEntryController extends Controller
 
         } catch (\Exception $e) {
             // remain on the same page with an error message
-            return redirect()->back()->with('error', 'An error occurred while creating the expense entry' . $e->getMessage());
+            return redirect()->route('expenses.create')->with('error', 'An error occurred while creating the expense entry' . $e->getMessage());
         }
     }
 
