@@ -18,9 +18,13 @@ class ExpenseEntry extends Model
         'description' => '',
         'amount' => 0,
         'categoryId' => 0,
-        'date' => 'now',
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->attributes['date'] = date('Y-m-d H:i:s');
+    }
     /**
      * The attributes that are mass assignable.
      */

@@ -24,6 +24,11 @@
                 <span ></span>
             </li>
             {{-- for each of the categories, display them in list elements --}}
+            @if ($categories->isEmpty())
+                <li>
+                    <span >No categories found</span>
+                </li>
+            @endif
             @foreach ($categories as $category)
                 <li>
                     <span >{{ $category->title }}</span>
@@ -32,21 +37,6 @@
                 </li>
             @endforeach
 
-            <li>
-                <span >Category 1</span>
-                <span >400</span>
-                <a href="{{ route('categories.edit', ['expenseCategory' => 1]) }}">edit</a>
-            </li>
-            <li>
-                <span >Category 2</span>
-                <span >600</span>
-                <a href="{{ route('categories.edit', ['expenseCategory' => 2]) }}">edit</a>
-            </li>
-            <li>
-                <span >Category 3</span>
-                <span >300</span>
-                <a href="{{ route('categories.edit', ['expenseCategory' => 1]) }}">edit</a>
-            </li>
         </ul>
 
     </section>
