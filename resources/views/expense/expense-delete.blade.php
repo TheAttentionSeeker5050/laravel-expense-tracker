@@ -6,12 +6,19 @@
     </h1>
     <section id="create-category-expense-main-section">
 
-        <form action="#" method="post" id="create-expense-category-form">
+        <form action="{{ route('expenses.destroy', ['expenseEntry' => $expenseEntry]) }}"
+            method="post" id="create-expense-category-form"
+            >
+            @csrf
+            @method('DELETE')
+
             <a href="{{ route('expenses.index') }}" id="add-button">
                 Back to Expenses
             </a>
 
-            <p> Are you sure you want to delete the < test 2 > expense? </p>
+            <p> Are you sure you want to delete the expense
+                < {{ $expenseEntry->description }} - ${{ $expenseEntry->amount }} >
+                ? </p>
 
             <button type="submit">Delete</button>
         </form>

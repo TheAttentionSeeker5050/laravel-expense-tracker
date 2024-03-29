@@ -46,7 +46,6 @@ class ExpenseEntryController extends Controller
         // display the view expense.expense-entries
         return view('expense.expense-list', [
             'currentNavStatus' => $currentNavStatus,
-            'expenseEntries' => $expenseEntries,
             'categorizedExpenseEntries' => $categorizedExpenseEntries,
         ]);
     }
@@ -126,22 +125,43 @@ class ExpenseEntryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ExpenseEntry $expenseEntry)
+    public function destroy(UpdateExpenseEntryRequest $request, ExpenseEntry $expenseEntry)
     {
-        //
+        // if no expense entry is found, return 404
+        if (!$expenseEntry) {
+            return abort(404);
+        }
+
+        // get the entry id
+        $entryId = $expenseEntry->id;
+
+        try {
+            // delete the expense entry
+            $expenseEntry->delete();
+
+            return redirect()->route('expenses.index')->with('success', 'Expense entry deleted successfully');
+
+        } catch (\Exception $e) {
+            // remain on the same page with an error message
+            return redirect()->route('expenses.delete', $entryId)->with('error', 'An error occurred while deleting the expense entry' . $e->getMessage());
+        }
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function deleteForm()
+    public function deleteForm(ExpenseEntry $expenseEntry)
     // public function destroyForm(ExpenseEntry $expenseEntry)
     {
         // a variable for the current nav opttion category
         $currentNavStatus = 'expense';
+
+
         // display the view expense.expense-delete
         return view('expense.expense-delete', [
             'currentNavStatus' => $currentNavStatus,
+            'expenseEntry' => $expenseEntry,
         ]);
     }
 }

@@ -34,11 +34,6 @@
             </div>
         @endif
 
-        {{-- print the amount of expense entries --}}
-        <p class="alert alert-success">
-            You have {{ $expenseEntries->count() }} expense entries
-        </p>
-
         {{-- iterate the categorized entries --}}
         @foreach ($categorizedExpenseEntries as $expenseEntryCategory)
             <ul class="expenses-list">
@@ -64,7 +59,7 @@
                     <li class="expense-list-item">
                         <span>{{ $expenseEntry->description }} - ${{ $expenseEntry->amount }}</span>
                         |
-                        <a href="{{ route('expenses.delete', ['expenseEntry' => $expenseEntry->id]) }}">Delete</a>
+                        <a href="{{ route('expenses.delete', ['expenseEntry' => $expenseEntry]) }}">Delete</a>
                     </li>
 
                 @endforeach
