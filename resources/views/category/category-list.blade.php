@@ -17,29 +17,41 @@
             </div>
         @endif
 
-        <ul id="categories-list">
-            <li class="categories-list-header w-100">
-                <span >Title</span>
-                <span >Budget</span>
-                <span ></span>
-            </li>
-            {{-- for each of the categories, display them in list elements --}}
-            @if ($categories->isEmpty())
-                <li class="w-100">
-                    <span >No categories found</span>
-                </li>
-            @endif
-            @foreach ($categories as $category)
-                <li class="w-100">
-                    <span >{{ $category->title }}</span>
-                    <span >{{ $category->budget }}</span>
-                    <a href="{{ route('categories.edit', ['expenseCategory' => $category]) }}">
-                        edit
-                    </a>
-                </li>
-            @endforeach
+        <table id="categories-list">
+            {{-- table header --}}
+            <thead >
+                <tr class="categories-list-header" >
+                    <th scope="col">Title</th>
+                    <th scope="col">Budget</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
 
-        </ul>
+            <tbody>
+                {{-- display categories list empty message --}}
+                @if ($categories->isEmpty())
+                <tr >
+                    <td>No categories found</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @endif
+
+                {{-- for each of the categories, display them in list elements --}}
+                @foreach ($categories as $category)
+                    <tr class="w-100">
+                        <td >{{ $category->title }}</td>
+                        <td >{{ $category->budget }}</td>
+                        <td>
+                            <a href="{{ route('categories.edit', ['expenseCategory' => $category]) }}">
+                                edit
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+
+        </table>
 
     </section>
 @endsection

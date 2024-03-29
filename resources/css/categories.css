@@ -1,4 +1,4 @@
-/* @import url('colors.css'); */
+
 
 
 body {
@@ -6,22 +6,21 @@ body {
     main {
 
 
-        #categories-list {
-            li {
-                justify-content: space-evenly;
-            }
-        }
+
+        #categories-listing-main-section{
+            padding: 1.5rem 2.8rem;
 
 
-        #categories-listing-main-section, #expense-listing-main-section, #create-category-expense-main-section {
-
-
-
-            ul {
+            table {
+                width: 100%;
 
                 .categories-list-header {
                     background-color: var(--background-tertiary);
                     color: var(--text-greyed);
+                }
+
+                td, th {
+                    padding: 0.6rem 1rem;
                 }
 
 
@@ -29,7 +28,7 @@ body {
         }
 
         #categories-list {
-            li {
+            tr {
 
                 background-color: var(--background-secondary);
                 a {
@@ -39,5 +38,15 @@ body {
         }
 
 
+    }
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        main {
+            #categories-listing-main-section {
+                padding: 1.5rem 1rem;
+            }
+        }
     }
 }

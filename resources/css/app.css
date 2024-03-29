@@ -1,4 +1,7 @@
 
+/* bootstrap local css file */
+@import url('bootstrap.css');
+
 /* import local css file color */
 @import url('colors.css');
 
@@ -14,7 +17,6 @@
 /* import footer local css */
 @import url('footer.css');
 
-@import url('bootstrap.css');
 
 
 * {
@@ -62,8 +64,11 @@ body {
             width: 100%;
         }
 
-        #categories-listing-main-section, #expense-listing-main-section, #create-category-expense-main-section {
+        #expense-listing-main-section, #create-category-expense-main-section {
             padding: 4.2rem 2.8rem;
+        }
+
+        #categories-listing-main-section, #expense-listing-main-section, #create-category-expense-main-section {
             display: flex;
             flex-direction: column;
             gap: 2rem;
