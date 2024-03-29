@@ -8,11 +8,6 @@ use App\Models\ExpenseCategory;
 
 class ExpenseCategoryController extends Controller
 {
-    // public function __construct()
-    // {
-    //     // exclude all the views from auth middleware, use wildcard
-    //     $this->middleware('auth')->except(['index', 'create', 'store']);
-    // }
 
     /**
      * Display a listing of the resource.
@@ -41,11 +36,16 @@ class ExpenseCategoryController extends Controller
     {
         // a variable for the current nav opttion category
         $currentNavStatus = 'category';
+        // $currentMethod = 'POST';
+
+
 
 
         // display the view category.category-add
         return view('category.category-add', [
             'currentNavStatus' => $currentNavStatus,
+            // 'currentMethod' => $currentMethod,
+
         ]);
     }
 
@@ -55,11 +55,6 @@ class ExpenseCategoryController extends Controller
     public function store(StoreExpenseCategoryRequest $request)
     {
 
-
-        // // get title and budget from the request
-        // $title = $request->input('title');
-        // $budget = $request->input('budget');
-
         // validate the request
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -67,11 +62,11 @@ class ExpenseCategoryController extends Controller
         ]);
 
         try {
-        // create a new category
-        ExpenseCategory::createCategory($validated['title'], $validated['budget']);
+            // create a new category
+            ExpenseCategory::createCategory($validated['title'], $validated['budget']);
 
-        // redirect to the category list
-        return redirect()->route('categories.index') -> with('success', 'Category created successfully');
+            // redirect to the category list
+            return redirect()->route('categories.index') -> with('success', 'Category created successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred. Please try again. Title: ' . $validated['title'] . '  | Budget: ' . $validated['budget'] . ' | Error: ' . $e->getMessage());
         }
@@ -91,7 +86,21 @@ class ExpenseCategoryController extends Controller
      */
     public function edit(ExpenseCategory $expenseCategory)
     {
-        //
+        // if expense category is not found, redirect to 404
+        if (!$expenseCategory) {
+            abort(404);
+        }
+
+        // a variable for the current nav opttion category
+        $currentNavStatus = 'category';
+        $currentMethod = 'PUT';
+
+        // display add view
+        return view('category.category-add', [
+            'category' => $expenseCategory,
+            'currentNavStatus' => $currentNavStatus,
+            'currentMethod' => $currentMethod,
+        ]);
     }
 
     /**
@@ -99,7 +108,27 @@ class ExpenseCategoryController extends Controller
      */
     public function update(UpdateExpenseCategoryRequest $request, ExpenseCategory $expenseCategory)
     {
-        //
+        // if expense category is not found, redirect to 404
+        if (!$expenseCategory) {
+            abort(404);
+        }
+
+        // validate the request
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'budget' => 'required|integer',
+        ]);
+
+        try {
+            // update the category
+            $expenseCategory->updateCategory($request->id, $validated['title'], $validated['budget']);
+
+            // redirect to the category list
+            return redirect()->route('categories.index') -> with('success', 'Category updated successfully');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred. Please try again. Title: ' . $validated['title'] . '  | Budget: ' . $validated['budget'] . ' | Error: ' . $e->getMessage());
+        }
     }
 
     /**

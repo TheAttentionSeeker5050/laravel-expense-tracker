@@ -8,7 +8,7 @@ body {
 
         #categories-list {
             li {
-                justify-content: space-between;
+                justify-content: space-evenly;
             }
         }
 
