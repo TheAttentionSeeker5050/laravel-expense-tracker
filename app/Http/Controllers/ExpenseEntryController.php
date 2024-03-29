@@ -20,10 +20,34 @@ class ExpenseEntryController extends Controller
         // get a list of expense entries
         $expenseEntries = ExpenseEntry::all();
 
+        // build a list of expense entries classifying them by category
+        $expenseEntries = $expenseEntries->groupBy('category_id');
+
+
+        $categorizedExpenseEntries = [];
+
+        // iterate the categories and add to each of the list elements the category name, the budget and the total expenses
+        foreach ($expenseEntries as $categoryId => $entries
+        ) {
+            $category = ExpenseCategory::find($categoryId);
+            // add the category name, the budget and the total expenses
+            $category->categoryName = $category->title;
+            $category->totalExpenses = $entries->sum('amount');
+            $category->budget = $category->budget;
+            $category->entries = $entries;
+
+            // calculate the percentage of the budget used, rounded
+            $category->percentageUsed = round(($category->totalExpenses / $category->budget) * 100);
+
+            // append the category to the list
+            $categorizedExpenseEntries[] = $category;
+        }
+
         // display the view expense.expense-entries
         return view('expense.expense-list', [
             'currentNavStatus' => $currentNavStatus,
             'expenseEntries' => $expenseEntries,
+            'categorizedExpenseEntries' => $categorizedExpenseEntries,
         ]);
     }
 

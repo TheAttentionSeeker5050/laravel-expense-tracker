@@ -39,39 +39,37 @@
             You have {{ $expenseEntries->count() }} expense entries
         </p>
 
-        <ul class="expenses-list">
-            <li class="expense-list-header">
-                <span>Category 1</span>
-                <span>$400.00 of $600.00/month</span>
-            </li>
-            <li class="budget-consumption-bar"
-            style="width: 60%; border-color: var(--outline-green);"
-            >
+        {{-- iterate the categorized entries --}}
+        @foreach ($categorizedExpenseEntries as $expenseEntryCategory)
+            <ul class="expenses-list">
+                <li class="expense-list-header">
+                    <span>{{ $expenseEntryCategory['categoryName'] }}</span>
+                    <span>${{ $expenseEntryCategory['totalExpenses'] }} of ${{ $expenseEntryCategory['budget'] }}/month</span>
+                </li>
 
-            </li>
-            <li class="expense-list-item">
-                <span>Expense 1 - $100.00</span>
-                |
-                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
-            </li>
-            <li class="expense-list-item">
-                <span>Expense 2 - $200.00</span>
-                |
-                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
-            </li>
+                {{-- consumption bar --}}
+                <li class="budget-consumption-bar"
+                    style="width: {{
+                        $expenseEntryCategory['percentageUsed'] > 100 ? '100%' : $expenseEntryCategory['percentageUsed'] . '%'
+                    }};
+                    border-color: {{
+                        $expenseEntryCategory['percentageUsed'] > 100 ? 'var(--outline-red)' : (
+                            $expenseEntryCategory['percentageUsed'] == 100 ? 'var(--outline-yellow)' : 'var(--outline-green)'
+                        )
+                    }};"
+                    >
+                </li>
 
-            <li class="expense-list-item">
-                <span>Expense 3 - $100.00</span>
-                |
-                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
-            </li>
+                @foreach ($expenseEntryCategory['entries'] as $expenseEntry)
+                    <li class="expense-list-item">
+                        <span>{{ $expenseEntry->description }} - ${{ $expenseEntry->amount }}</span>
+                        |
+                        <a href="{{ route('expenses.delete', ['expenseEntry' => $expenseEntry->id]) }}">Delete</a>
+                    </li>
 
-            <li class="expense-list-item">
-                <span>Expense 4 - $200.00</span>
-                |
-                <a href="{{ route('expenses.delete', ['expenseEntry' => 1]) }}">Delete</a>
-            </li>
-        </ul>
+                @endforeach
+            </ul>
+        @endforeach
 
     </section>
 @endsection
