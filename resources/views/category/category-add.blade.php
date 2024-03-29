@@ -6,9 +6,9 @@
     </h1>
     <section id="create-category-expense-main-section">
 
-        @if (Session::has('message'))
+        @if (Session::has('success'))
             <div class="alert alert-success">
-                {{ Session::get('message') }}
+                {{ Session::get('success') }}
             </div>
         @endif
         @if (Session::has('error'))

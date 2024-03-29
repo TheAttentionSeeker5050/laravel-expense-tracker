@@ -61,6 +61,10 @@ class ExpenseCategoryController extends Controller
             'budget' => 'required|integer',
         ]);
 
+        if (!$validated) {
+            return redirect()->back()->with('error', 'An error occurred. Please try again. Title: ' . $validated['title'] . '  | Budget: ' . $validated['budget']);
+        }
+
         try {
             // create a new category
             ExpenseCategory::createCategory($validated['title'], $validated['budget']);

@@ -5,8 +5,21 @@
         Create Expense
     </h1>
     <section id="create-category-expense-main-section">
+        @if (Session::has('success'))
+            <div class="alert alert-success">
+                {{ Session::get('success') }}
+            </div>
+        @endif
+        @if (Session::has('error'))
+            <div class="alert alert-danger">
+                {{ Session::get('error') }}
+            </div>
+        @endif
 
-        <form action="#" method="post" id="create-expense-category-form">
+        <form action="{{ route('expenses.store') }}"
+            method="POST" id="create-expense-category-form">
+            @csrf
+
             <a href="{{ route('expenses.index') }}" id="add-button">
                 Back to Expenses
             </a>
@@ -34,9 +47,11 @@
                 </label>
                 <select name="category" id="category" class="select-input budget-input-container form-select">
                     <option value="" selected>Please select one...</option>
-                    <option value="1">Category 1</option>
-                    <option value="2">Category 2</option>
-                    <option value="3">Category 3</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">
+                            {{ $category->title }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 

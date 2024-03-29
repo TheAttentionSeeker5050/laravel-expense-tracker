@@ -23,6 +23,10 @@ body {
                     padding: 0.6rem 1rem;
                 }
 
+                td {
+                    border-bottom: 2px solid var(--background-tertiary);
+                }
+
 
             }
         }

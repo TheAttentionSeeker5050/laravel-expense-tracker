@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreExpenseEntryRequest;
 use App\Http\Requests\UpdateExpenseEntryRequest;
 use App\Models\ExpenseEntry;
+use App\Models\ExpenseCategory;
 
 class ExpenseEntryController extends Controller
 {
@@ -15,9 +16,14 @@ class ExpenseEntryController extends Controller
     {
         // a variable for the current nav opttion category
         $currentNavStatus = 'expense';
+
+        // get a list of expense entries
+        $expenseEntries = ExpenseEntry::all();
+
         // display the view expense.expense-entries
         return view('expense.expense-list', [
             'currentNavStatus' => $currentNavStatus,
+            'expenseEntries' => $expenseEntries,
         ]);
     }
 
@@ -29,9 +35,13 @@ class ExpenseEntryController extends Controller
         // a variable for the current nav opttion category
         $currentNavStatus = 'expense';
 
+        // get a list of categories
+        $categories = ExpenseCategory::all();
+
         // display the view expense.create-expense-add
         return view('expense.expense-add', [
             'currentNavStatus' => $currentNavStatus,
+            'categories' => $categories,
         ]);
     }
 
@@ -40,7 +50,31 @@ class ExpenseEntryController extends Controller
      */
     public function store(StoreExpenseEntryRequest $request)
     {
-        //
+        // validate the request fields
+        $validated = $request->validate([
+            'description' => 'required|string|max:255',
+            'amount' => 'required|integer',
+            'category' => 'required|integer',
+        ]);
+
+        if (!$validated) {
+            // LOG ERROR INTO THE CONSOLE
+            error_log('An error occurred while creating the expense entry');
+            // remain on the same page with an error message
+            return back()->with('error', 'An error occurred while creating the expense entry');
+        }
+
+        try {
+            // create a new expense entry
+            ExpenseEntry::createEntry($validated['description'], $validated['amount'], $validated['category']);
+
+            // redirect to expense entries list with a success message
+            return redirect()->route('expenses.index')->with('success', 'Expense entry created successfully');
+
+        } catch (\Exception $e) {
+            // remain on the same page with an error message
+            return redirect()->back()->with('error', 'An error occurred while creating the expense entry' . $e->getMessage());
+        }
     }
 
     /**

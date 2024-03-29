@@ -9,6 +9,7 @@ class ExpenseCategory extends Model
 {
     use HasFactory;
 
+    // data definition methods and properties -------------------------
     /**
      * The model's default values for attributes.
      *
@@ -19,6 +20,13 @@ class ExpenseCategory extends Model
         'budget' => 0,
     ];
 
+    // protected $fillable = ['title', 'budget'];
+
+    public function entries()
+    {
+        return $this->hasMany(ExpenseEntry::class, 'category_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      */
@@ -27,8 +35,6 @@ class ExpenseCategory extends Model
         'budget' => 'integer',
     ];
 
-
-    // public crud methods --------------------------------------------
     public function definition(): array
     {
         return [
@@ -36,7 +42,6 @@ class ExpenseCategory extends Model
             'budget' => fake()->numberBetween(100, 1000),
         ];
     }
-
 
     // public crud methods --------------------------------------------
     // create category
