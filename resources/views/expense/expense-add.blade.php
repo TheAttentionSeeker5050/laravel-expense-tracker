@@ -6,9 +6,13 @@
     </h1>
     <section id="create-category-expense-main-section">
 
-        <form action="{{ route('expenses.store') }}"
+        <form action="{{ $isEdit ? route('expenses.update', ['month' => $month, 'year' => $year, 'expenseEntry' => $expenseEntry]) : route('expenses.store', ['month' => $month, 'year' => $year]) }}"
             method="POST" id="create-expense-category-form">
             @csrf
+
+            @if ($isEdit)
+                @method('PUT')
+            @endif
 
             <a href="{{ route('expenses.index') }}" id="add-button">
                 Back to Expenses
@@ -26,12 +30,21 @@
                 </div>
             @endif
 
+            {{-- hidden month and year number --}}
+            <input type="hidden" name="month" value="{{ $month }}">
+            <input type="hidden" name="year" value="{{ $year }}">
+
             <div class="form-group">
                 <label for="description" class="form-label">
                     Description
                 </label>
+                @if ($description !== null)
+                    <input type="text" name="description" id="description" class="budget-input-container form-control"
+                        value="{{ $description }}" required>
+                @else
                 <input type="text" name="description" id="description" class="budget-input-container form-control"
                     required>
+                @endif
             </div>
 
             <div class="form-group">
@@ -40,8 +53,13 @@
                 </label>
                 <div class="budget-input-container input-group">
                     <span class="input-group-text bg-secondary text-light">$</span>
-                    <input type="text" name="amount" id="amount" class="form-control"
-                        required>
+                    @if ($amount !== null)
+                        <input type="number" name="amount" id="amount" class="form-control"
+                            value="{{ $amount }}" required>
+                    @else
+                        <input type="number" name="amount" id="amount" class="form-control"
+                            required>
+                    @endif
                 </div>
             </div>
 
@@ -53,14 +71,24 @@
                     required>
                     <option value='{{null}}'>Please select one...</option>
                     @foreach($categories as $category)
-                        <option value="{{ $category->id }}">
-                            {{ $category->title }}
-                        </option>
+                        @if ($selectedCategory !== null && $selectedCategory == $category->id)
+                            <option value="{{ $category->id }}" selected>
+                                {{ $category->title }}
+                            </option>
+                        @else
+                            <option value="{{ $category->id }}">
+                                {{ $category->title }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
             </div>
 
-            <button type="submit">Add</button>
+            @if ($isEdit)
+                <button type="submit">Update</button>
+            @else
+                <button type="submit">Add</button>
+            @endif
         </form>
 
     </section>

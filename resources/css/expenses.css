@@ -60,12 +60,17 @@ body {
                     background-color: var(--background-tertiary) !important;
                     border-bottom: 2px solid var(--background-quaternary);
 
-                    a {
+                    .delete-form-link {
                         color: var(--text-red) !important;
                     }
-
-                    span {
-                        color: var(--text-blue-secondary);
+                    .delete-form-link:hover {
+                        color: var(--text-red-hover) !important;
+                    }
+                    .edit-form-link {
+                        color: var(--text-blue-secondary) !important;
+                    }
+                    .edit-form-link:hover {
+                        color: var(--text-blue-secondary-hover) !important;
                     }
                 }
 

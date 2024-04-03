@@ -42,7 +42,7 @@ class ExpenseEntry extends Model
     // public crud methods --------------------------------------------
 
     // create entry
-    public static function createEntry($description, $amount, $categoryId)
+    public static function createEntry($description, $amount, $categoryId, $customCreatedAt = null)
     {
         $entry = new ExpenseEntry();
         $entry->description = $description;
@@ -52,6 +52,11 @@ class ExpenseEntry extends Model
         // the timestamps
         $entry->created_at = date('Y-m-d H:i:s');
         $entry->updated_at = date('Y-m-d H:i:s');
+
+        if ($customCreatedAt) {
+            $entry->created_at = $customCreatedAt;
+            $entry->updated_at = $customCreatedAt;
+        }
 
         $entry->save();
         return $entry;

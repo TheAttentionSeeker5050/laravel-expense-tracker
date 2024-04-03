@@ -26,6 +26,8 @@ Route::get('/expenses/create', [ExpenseEntryController::class, 'create']) -> nam
 Route::post('/expenses/create', [ExpenseEntryController::class, 'store']) -> name('expenses.store');
 Route::get('/expenses/{expenseEntry}/delete', [ExpenseEntryController::class, 'deleteForm']) -> name('expenses.delete');
 Route::delete('/expenses/{expenseEntry}/delete', [ExpenseEntryController::class, 'destroy']) -> name('expenses.destroy');
+Route::put('/expenses/{expenseEntry}/edit', [ExpenseEntryController::class, 'update']) -> name('expenses.update');
+Route::get('/expenses/{expenseEntry}/edit', [ExpenseEntryController::class, 'edit']) -> name('expenses.edit');
 
 // the category routes
 Route::get('/categories', [ExpenseCategoryController::class, 'index']) -> name('categories.index');

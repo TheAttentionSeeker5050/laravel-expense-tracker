@@ -86,6 +86,8 @@ class ExpenseEntryController extends Controller
             'prevYear' => $prevYear,
             'nextMonth' => $nextMonth,
             'nextYear' => $nextYear,
+            'month' => $month,
+            'year' => $year,
         ]);
     }
 
@@ -94,6 +96,10 @@ class ExpenseEntryController extends Controller
      */
     public function create()
     {
+        // get month and year from the query string
+        $month = request('month', date('m'));
+        $year = request('year', date('Y'));
+
         // a variable for the current nav opttion category
         $currentNavStatus = 'expense';
 
@@ -104,6 +110,8 @@ class ExpenseEntryController extends Controller
         return view('expense.expense-add', [
             'currentNavStatus' => $currentNavStatus,
             'categories' => $categories,
+            'month' => $month,
+            'year' => $year,
         ]);
     }
 
@@ -112,6 +120,13 @@ class ExpenseEntryController extends Controller
      */
     public function store(StoreExpenseEntryRequest $request)
     {
+        // get the year and month from the request body
+        $month = $request->input('month', date('m'));
+        $year = $request->input('year', date('Y'));
+        // create custom created_at date
+        $customCreatedAt = $year . '-' . $month . '-01 00:00:00';
+
+
         // validate the request fields
         $validated = $request->validate([
             'description' => 'required|string|max:255',
@@ -126,10 +141,10 @@ class ExpenseEntryController extends Controller
 
         try {
             // create a new expense entry
-            ExpenseEntry::createEntry($validated['description'], $validated['amount'], $validated['category']);
+            ExpenseEntry::createEntry($validated['description'], $validated['amount'], $validated['category'], $customCreatedAt);
 
             // redirect to expense entries list with a success message
-            return redirect()->route('expenses.index')->with('success', 'Expense entry created successfully');
+            return redirect()->route('expenses.index', ['month' => $month, 'year' => $year])->with('success', 'Expense entry created successfully');
 
         } catch (\Exception $e) {
             // remain on the same page with an error message
@@ -150,7 +165,37 @@ class ExpenseEntryController extends Controller
      */
     public function edit(ExpenseEntry $expenseEntry)
     {
-        //
+        // // get month and year from the query string
+        // $month = request('month', date('m'));
+        // $year = request('year', date('Y'));
+
+        // get month and year from the expense entry created_at
+        $month = date('m', strtotime($expenseEntry->created_at));
+        $year = date('Y', strtotime($expenseEntry->created_at));
+
+        // get the fields from the expense entry
+        $description = $expenseEntry->description;
+        $amount = $expenseEntry->amount;
+        $category = $expenseEntry->category_id;
+
+        // a variable for the current nav opttion category
+        $currentNavStatus = 'expense';
+
+        // get a list of categories
+        $categories = ExpenseCategory::all();
+
+        // display the view expense.create-expense-add
+        return view('expense.expense-add', [
+            'currentNavStatus' => $currentNavStatus,
+            'categories' => $categories,
+            'month' => $month,
+            'year' => $year,
+            'description' => $description,
+            'amount' => $amount,
+            'selectedCategory' => $category,
+            'isEdit' => true,
+            'expenseEntry' => $expenseEntry,
+        ]);
     }
 
     /**
@@ -158,7 +203,36 @@ class ExpenseEntryController extends Controller
      */
     public function update(UpdateExpenseEntryRequest $request, ExpenseEntry $expenseEntry)
     {
-        //
+        // get the year and month from the request body
+        $month = $request->input('month', date('m'));
+        $year = $request->input('year', date('Y'));
+        // create custom created_at date
+        $customCreatedAt = $year . '-' . $month . '-01 00:00:00';
+
+
+        // validate the request fields
+        $validated = $request->validate([
+            'description' => 'required|string|max:255',
+            'amount' => 'required|integer',
+            'category' => 'required|integer|min:1',
+        ]);
+
+        if (!$validated) {
+            // remain on the same page with an error message
+            return redirect()->route('expenses.edit', $expenseEntry->id)->with('error', 'An error occurred while updating the expense entry');
+        }
+
+        try {
+            // create a new expense entry
+            ExpenseEntry::editEntry($expenseEntry->id, $validated['description'], $validated['amount'], $validated['category']);
+
+            // redirect to expense entries list with a success message
+            return redirect()->route('expenses.index', ['month' => $month, 'year' => $year])->with('success', 'Expense entry created successfully');
+
+        } catch (\Exception $e) {
+            // remain on the same page with an error message
+            return redirect()->route('expenses.edit', $expenseEntry->id)->with('error', 'An error occurred while updating the expense entry' . $e->getMessage());
+        }
     }
 
     /**
@@ -174,11 +248,15 @@ class ExpenseEntryController extends Controller
         // get the entry id
         $entryId = $expenseEntry->id;
 
+        // get the month and year from the expense entry created_at
+        $month = date('m', strtotime($expenseEntry->created_at));
+        $year = date('Y', strtotime($expenseEntry->created_at));
+
         try {
             // delete the expense entry
             $expenseEntry->delete();
 
-            return redirect()->route('expenses.index')->with('success', 'Expense entry deleted successfully');
+            return redirect()->route('expenses.index', ['month' => $month, 'year' => $year])->with('success', 'Expense entry deleted successfully');
 
         } catch (\Exception $e) {
             // remain on the same page with an error message

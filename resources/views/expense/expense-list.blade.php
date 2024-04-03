@@ -20,7 +20,7 @@
     </section>
 
     <section id="expense-listing-main-section">
-        <a href="{{ route('expenses.create') }}" id="add-button">
+        <a href="{{ route('expenses.create', ['month' => $month, 'year' => $year]) }}" id="add-button">
             Add Expense
         </a>
 
@@ -58,9 +58,12 @@
 
                 @foreach ($expenseEntryCategory['entries'] as $expenseEntry)
                     <li class="expense-list-item">
-                        <span>{{ $expenseEntry->description }} - ${{ $expenseEntry->amount }}</span>
+
+                        <a href="{{ route('expenses.edit', ['expenseEntry' => $expenseEntry]) }}" class="edit-form-link">
+                            {{ $expenseEntry->description }} - ${{ $expenseEntry->amount }}
+                        </a>
                         |
-                        <a href="{{ route('expenses.delete', ['expenseEntry' => $expenseEntry]) }}">Delete</a>
+                        <a href="{{ route('expenses.delete', ['expenseEntry' => $expenseEntry]) }}" class="delete-form-link">Delete</a>
                     </li>
 
                 @endforeach
