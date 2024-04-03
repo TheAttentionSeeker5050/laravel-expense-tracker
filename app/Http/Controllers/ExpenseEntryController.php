@@ -14,11 +14,40 @@ class ExpenseEntryController extends Controller
      */
     public function index()
     {
+        // get the current month and year from the query string
+        // this includes the default values set as the current month and year
+        $month = request('month', date('m'));
+        $year = request('year', date('Y'));
+
+        // make previous and next month and year
+        $prevMonth = $month - 1;
+        $prevYear = $year;
+        $nextMonth = $month + 1;
+        $nextYear = $year;
+
+        // if the prev month is less than 1, set it to 12 and decrement the year
+        if ($prevMonth < 1) {
+            $prevMonth = 12;
+            $prevYear--;
+        }
+
+        // if the next month is greater than 12, set it to 1 and increment the year
+        if ($nextMonth > 12) {
+            $nextMonth = 1;
+            $nextYear++;
+        }
+
+        // make string Month (January, February) and string Year
+        $strMonth = date('F', strtotime($year . '-' . $month . '-01'));
+        $strYear = date('Y', strtotime($year . '-' . $month . '-01'));
+
         // a variable for the current nav opttion category
         $currentNavStatus = 'expense';
 
-        // get a list of expense entries
-        $expenseEntries = ExpenseEntry::all();
+        // get a list of expense entries and filter them by the current month and year
+        $expenseEntries = ExpenseEntry::whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->get();
 
         // build a list of expense entries classifying them by category
         $expenseEntries = $expenseEntries->groupBy('category_id');
@@ -29,8 +58,12 @@ class ExpenseEntryController extends Controller
         // iterate the categories and add to each of the list elements the category name, the budget and the total expenses
         foreach ($expenseEntries as $categoryId => $entries
         ) {
+
             $category = ExpenseCategory::find($categoryId);
             // add the category name, the budget and the total expenses
+            // print in console the entries[0] created_at and updated_at
+            // get the date from a carbon object on entries created_at
+
             $category->categoryName = $category->title;
             $category->totalExpenses = $entries->sum('amount');
             $category->budget = $category->budget;
@@ -47,6 +80,12 @@ class ExpenseEntryController extends Controller
         return view('expense.expense-list', [
             'currentNavStatus' => $currentNavStatus,
             'categorizedExpenseEntries' => $categorizedExpenseEntries,
+            'strMonth' => $strMonth,
+            'strYear' => $strYear,
+            'prevMonth' => $prevMonth,
+            'prevYear' => $prevYear,
+            'nextMonth' => $nextMonth,
+            'nextYear' => $nextYear,
         ]);
     }
 

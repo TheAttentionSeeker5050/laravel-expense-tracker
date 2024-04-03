@@ -4,15 +4,15 @@
 
     <section id="expense-month-navigation-buttons-section">
         <h1>
-            Expenses - March 2024
+            Expenses - {{$strMonth}} {{$strYear}}
         </h1>
 
         <p>
-            <a href="#" >
+            <a href="/expenses?month={{ $prevMonth }}&year={{ $prevYear }}">
                 Previous Month
             </a>
 
-            <a href="#" >
+            <a href="/expenses?month={{ $nextMonth }}&year={{ $nextYear }}">
                 Next Month
             </a>
         </p>
@@ -65,6 +65,14 @@
                 @endforeach
             </ul>
         @endforeach
+
+        {{-- if no expense entries, display message no entries --}}
+        @if (count($categorizedExpenseEntries) == 0)
+            <p>
+                No expense entries found.
+            </p>
+        @endif
+
 
     </section>
 @endsection
