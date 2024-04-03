@@ -35,7 +35,7 @@ class ExpenseEntry extends Model
      */
     protected $casts = [
         'description' => 'string',
-        'amount' => 'integer',
+        'amount' => 'float',
         'category_id' => 'integer',
     ];
 

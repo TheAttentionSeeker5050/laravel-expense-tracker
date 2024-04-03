@@ -6,11 +6,11 @@
     </h1>
     <section id="create-category-expense-main-section">
 
-        <form action="{{ $isEdit ? route('expenses.update', ['month' => $month, 'year' => $year, 'expenseEntry' => $expenseEntry]) : route('expenses.store', ['month' => $month, 'year' => $year]) }}"
+        <form action="{{ isset($isEdit) && $isEdit === true ? route('expenses.update', ['month' => $month, 'year' => $year, 'expenseEntry' => $expenseEntry]) : route('expenses.store', ['month' => $month, 'year' => $year]) }}"
             method="POST" id="create-expense-category-form">
             @csrf
 
-            @if ($isEdit)
+            @if (isset($isEdit) && $isEdit === true)
                 @method('PUT')
             @endif
 
@@ -38,7 +38,7 @@
                 <label for="description" class="form-label">
                     Description
                 </label>
-                @if ($description !== null)
+                @if (isset($description))
                     <input type="text" name="description" id="description" class="budget-input-container form-control"
                         value="{{ $description }}" required>
                 @else
@@ -53,12 +53,13 @@
                 </label>
                 <div class="budget-input-container input-group">
                     <span class="input-group-text bg-secondary text-light">$</span>
-                    @if ($amount !== null)
+                    @if (isset($amount))
+                    {{-- input 2 decimal places --}}
                         <input type="number" name="amount" id="amount" class="form-control"
-                            value="{{ $amount }}" required>
+                            value="{{ $amount }}" required step="0.01">
                     @else
                         <input type="number" name="amount" id="amount" class="form-control"
-                            required>
+                            required step="0.01">
                     @endif
                 </div>
             </div>
@@ -71,7 +72,7 @@
                     required>
                     <option value='{{null}}'>Please select one...</option>
                     @foreach($categories as $category)
-                        @if ($selectedCategory !== null && $selectedCategory == $category->id)
+                        @if (isset($selectedCategory) && $selectedCategory === $category->id)
                             <option value="{{ $category->id }}" selected>
                                 {{ $category->title }}
                             </option>
@@ -84,7 +85,7 @@
                 </select>
             </div>
 
-            @if ($isEdit)
+            @if (isset($isEdit) && $isEdit)
                 <button type="submit">Update</button>
             @else
                 <button type="submit">Add</button>

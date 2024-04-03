@@ -46,7 +46,7 @@ class ExpensesAndCategoriesSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             $entries[] = [
                 'description' => fake()->sentence(6),
-                'amount' => fake()->numberBetween(10, 100),
+                'amount' => fake()->randomFloat(2, 30, 200),
                 // random category between 1 and 10
                 'category_id' => fake()->numberBetween(1, 10),
                 'created_at' => fake()->dateTimeBetween('-20 month', 'now')->format('Y-m-d H:i:s'),
@@ -56,6 +56,7 @@ class ExpensesAndCategoriesSeeder extends Seeder
             // create a new entry
             \App\Models\ExpenseEntry::create([
                 'description' => $entries[$i]['description'],
+                // cast to float
                 'amount' => $entries[$i]['amount'],
                 'category_id' => $entries[$i]['category_id'],
                 'created_at' => $entries[$i]['created_at'],

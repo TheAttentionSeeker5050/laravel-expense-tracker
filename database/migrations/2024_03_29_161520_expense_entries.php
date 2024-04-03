@@ -11,7 +11,8 @@ return new class extends Migration
         Schema::create('expense_entries', function (Blueprint $table) {
             $table->id();
             $table->string('description')->default('');
-            $table->integer('amount')->default(0);
+            // float with 2 decimals
+            $table->decimal('amount', 10, 2)->default(0);
             $table->unsignedBigInteger('category_id')->default(0);
             $table->timestamps();
 

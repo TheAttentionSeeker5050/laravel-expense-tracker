@@ -52,7 +52,10 @@ class ExpenseEntryController extends Controller
         // build a list of expense entries classifying them by category
         $expenseEntries = $expenseEntries->groupBy('category_id');
 
+        // get a list of categories
+        $categories = ExpenseCategory::all();
 
+        // create a list of categorized expense entries
         $categorizedExpenseEntries = [];
 
         // iterate the categories and add to each of the list elements the category name, the budget and the total expenses
@@ -63,14 +66,43 @@ class ExpenseEntryController extends Controller
             // add the category name, the budget and the total expenses
             // print in console the entries[0] created_at and updated_at
             // get the date from a carbon object on entries created_at
-
+            $category->categoryID = $category->id;
             $category->categoryName = $category->title;
-            $category->totalExpenses = $entries->sum('amount');
+            $category->totalExpenses = round($entries->sum('amount'));
             $category->budget = $category->budget;
             $category->entries = $entries;
 
             // calculate the percentage of the budget used, rounded
             $category->percentageUsed = round(($category->totalExpenses / $category->budget) * 100);
+
+            // append the category to the list
+            $categorizedExpenseEntries[] = $category;
+        }
+
+        // fill the remaining categories with no expenses, just title and budget ----------------
+        // --------------------------------------------------------------------------------------
+
+        // first filter out the categories array that have already been added
+        $categories = $categories->filter(function ($category) use ($categorizedExpenseEntries) {
+            foreach ($categorizedExpenseEntries as $categorizedExpenseEntry) {
+                // if it is already in the list, return false
+                if ($category->id == $categorizedExpenseEntry->categoryID) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+
+        // iterate the remaining categories and add to each of the list elements the category name, the budget and the total expenses
+        foreach ($categories as $category) {
+            // add the category name, the budget and the total expenses
+            $category->categoryID = $category->id;
+            $category->categoryName = $category->title;
+            $category->totalExpenses = 0;
+            $category->budget = $category->budget;
+            $category->entries = [];
+            $category->percentageUsed = 0;
 
             // append the category to the list
             $categorizedExpenseEntries[] = $category;
@@ -88,6 +120,7 @@ class ExpenseEntryController extends Controller
             'nextYear' => $nextYear,
             'month' => $month,
             'year' => $year,
+
         ]);
     }
 
@@ -130,7 +163,8 @@ class ExpenseEntryController extends Controller
         // validate the request fields
         $validated = $request->validate([
             'description' => 'required|string|max:255',
-            'amount' => 'required|integer',
+            // amount must be a float
+            'amount' => 'required|numeric',
             'category' => 'required|integer|min:1',
         ]);
 
@@ -141,7 +175,7 @@ class ExpenseEntryController extends Controller
 
         try {
             // create a new expense entry
-            ExpenseEntry::createEntry($validated['description'], $validated['amount'], $validated['category'], $customCreatedAt);
+            ExpenseEntry::createEntry($validated['description'], round($validated['amount'], 2), $validated['category'], $customCreatedAt);
 
             // redirect to expense entries list with a success message
             return redirect()->route('expenses.index', ['month' => $month, 'year' => $year])->with('success', 'Expense entry created successfully');
@@ -206,14 +240,12 @@ class ExpenseEntryController extends Controller
         // get the year and month from the request body
         $month = $request->input('month', date('m'));
         $year = $request->input('year', date('Y'));
-        // create custom created_at date
-        $customCreatedAt = $year . '-' . $month . '-01 00:00:00';
 
 
         // validate the request fields
         $validated = $request->validate([
             'description' => 'required|string|max:255',
-            'amount' => 'required|integer',
+            'amount' => 'required|numeric',
             'category' => 'required|integer|min:1',
         ]);
 
