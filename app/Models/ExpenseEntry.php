@@ -39,16 +39,6 @@ class ExpenseEntry extends Model
         'category_id' => 'integer',
     ];
 
-
-    public function definition(): array
-    {
-        return [
-            'description' => fake()->sentence(6),
-            'amount' => fake()->numberBetween(10, 100),
-            'category_id' => ExpenseCategory::factory(),
-        ];
-    }
-
     // public crud methods --------------------------------------------
 
     // create entry

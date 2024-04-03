@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "seed-db": "sail artisan db:seed --class=ExpensesAndCategoriesSeeder",
+        "migrate-db": "sail artisan migrate:fresh"
     },
     "devDependencies": {
         "axios": "^1.6.4",

@@ -8,11 +8,12 @@
         </h1>
 
         <p>
-            <a href="/expenses?month={{ $prevMonth }}&year={{ $prevYear }}">
+            {{-- <a href="/expenses?month={{ $prevMonth }}&year={{ $prevYear }}"> --}}
+                <a href="{{ route('expenses.index', ['month' => $prevMonth, 'year' => $prevYear]) }}">
                 Previous Month
             </a>
 
-            <a href="/expenses?month={{ $nextMonth }}&year={{ $nextYear }}">
+            <a href="{{ route('expenses.index', ['month' => $nextMonth, 'year' => $nextYear]) }}">
                 Next Month
             </a>
         </p>

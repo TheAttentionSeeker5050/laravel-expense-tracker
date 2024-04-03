@@ -35,14 +35,6 @@ class ExpenseCategory extends Model
         'budget' => 'integer',
     ];
 
-    public function definition(): array
-    {
-        return [
-            'title' => fake()->sentence(3),
-            'budget' => fake()->numberBetween(100, 1000),
-        ];
-    }
-
     // public crud methods --------------------------------------------
     // create category
     public static function createCategory($title, $budget)
