@@ -14,7 +14,7 @@
                 @method('PUT')
             @endif
 
-            <a href="{{ route('expenses.index') }}" id="add-button">
+            <a href="{{ isset($month) && isset($year) ? route('expenses.index', ['month' => $month, 'year' => $year]) : route('expenses.index') }}" >
                 Back to Expenses
             </a>
 
